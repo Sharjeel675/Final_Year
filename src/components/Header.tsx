@@ -1,6 +1,8 @@
 "use client"; import Link from 'next/link'
 import React, { useState } from 'react'
 import Signup from './Signup';
+import { DropdownMenu } from './ui/dropdown-menu';
+
 
 const Header = () => {
   
@@ -31,6 +33,8 @@ const Header = () => {
         </nav>
         <button>
           <Signup/>
+          {/* <DropdownMenuDemo/> */}
+      
           <svg
             fill="none"
             stroke="currentColor"

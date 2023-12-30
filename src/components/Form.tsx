@@ -1,178 +1,210 @@
 "use client";
 
-import React, { useState } from 'react';
+import Image from "next/image";
+import React, { useState } from "react";
+import formImage from "../img/Graduate.jpg";
 
-const teachers = ['Ameen', 'Teacher 2', 'Teacher 3'];
-const projects = ['Project A', 'Project B', 'Project C'];
-const departments = ['Department 1', 'Department 2', 'Department 3'];
+const teachers = ["Ameen kh", "", "Teacher 3"];
+const projects = ["Project A", "Project B", "Project C"];
+const departments = [
+  "Software Engineering",
+  "Computer Science",
+  "Artificial Intelligence",
+  "Cyber Security",
+  "Data Science",
+];
 
 const Form = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    fatherName: '',
-    email: '',
-    phoneNumber: '',
-    selectedTeacher: teachers[0],
-    comment: '',
-    selectedProject: projects[0],
-    selectedDepartment: departments[0],
-    selectedGender: 'Female',
-    startDate: '',
-    endDate: '',
-  });
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const [name, setName] = useState("");
+  const [fatherName, setFatherName] = useState("");
+  const [mail, setMail] = useState("");
+  const [department, setDepartment] = useState("");
+  const [gender, setGender] = useState("");
+  const [ProjectTitle, setProjectTitle] = useState("");
+  const [StudentId, setStudentId] = useState("");
+  const [SupervisorName, setSupervisorName] = useState("");
+  console.log(
+    name,
+    fatherName,
+    mail,
+    department,
+    gender,
+    ProjectTitle,
+    StudentId,
+    SupervisorName,
+    "asasasasasas"
+  );
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    // Add your form submission logic here
+    const api = await fetch("/api/project", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name,
+        fatherName,
+        mail,
+        department,
+        ProjectTitle,
+        StudentId,
+        SupervisorName,
+        gender,
+      }),
+    });
+    alert("Your Form Has Been Submited");
+    setName("");
   };
 
   return (
-    <div className=" lg:w-2/3 w-full mt-10 p-4 bg-white shadow-md rounded-md ">
-      <h1 className="text-2xl font-bold mb-4">Teachers Selection Form</h1>
-      <form onSubmit={handleSubmit}>
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-600">Name:</label>
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            className="mt-1 p-2 border rounded-md w-full"
-            required
-          />
-        </div>
+    <div className="flex">
+      <div className=" lg:w-2/3 w-full mt-10 p-4 bg-white shadow-md rounded-md ">
+        <h1 className="text-2xl font-bold mb-4">Teachers Selection Form</h1>
+        <form onSubmit={handleSubmit}>
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-600">
+              Name:
+            </label>
+            <input
+              type="text"
+              name="name"
+              value={name}
+              onChange={(e: any) => setName(e.target.value)}
+              className="mt-1 p-2 border rounded-md w-full"
+              required
+            />
+          </div>
 
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-600">Father's Name:</label>
-          <input
-            type="text"
-            name="fatherName"
-            value={formData.fatherName}
-            onChange={handleChange}
-            className="mt-1 p-2 border rounded-md w-full"
-            required
-          />
-        </div>
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-600">
+              Father's Name:
+            </label>
+            <input
+              type="text"
+              name="fatherName"
+              value={fatherName}
+              onChange={(e: any) => setFatherName(e.target.value)}
+              className="mt-1 p-2 border rounded-md w-full"
+              required
+            />
+          </div>
 
-        {/* Add the teacher selection dropdown */}
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-600">Supervisor Name</label>
-          <select
-            name="selectedTeacher"
-            value={formData.selectedTeacher}
-            onChange={handleChange}
-            className="mt-1 p-2 border rounded-md w-full"
-          >
-            {teachers.map((teacher, index) => (
-              <option key={index} value={teacher}>
-                {teacher}
-              </option>
+          {/* Add the teacher selection dropdown */}
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-600">
+              Supervisor Name
+            </label>
+            <input
+              type="text"
+              name="supervisorBhand"
+              value={SupervisorName}
+              onChange={(e: any) => setSupervisorName(e.target.value)}
+              className="mt-1 p-2 border rounded-md w-full"
+              required
+            />
+          </div>
+
+          {/* Student ID*/}
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-600">
+              Student ID
+            </label>
+            <input
+              type="text"
+              name="StudentId"
+              value={StudentId}
+              onChange={(e: any) => setStudentId(e.target.value)}
+              className="mt-1 p-2 border rounded-md w-full"
+              required
+            />
+          </div>
+
+          {/* Student Gmail*/}
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-600">
+              Student Email
+            </label>
+            <input
+              type="text"
+              name="Email"
+              value={mail}
+              onChange={(e: any) => setMail(e.target.value)}
+              className="mt-1 p-2 border rounded-md w-full"
+              required
+            />
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-600">
+              Project Title
+            </label>
+            <input
+              type="text"
+              name="fatherName"
+              value={ProjectTitle}
+              onChange={(e: any) => setProjectTitle(e.target.value)}
+              className="mt-1 p-2 border rounded-md w-full"
+              required
+            />
+          </div>
+
+          {/* Add the student department radio buttons */}
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-600">
+              Student Dept:
+            </label>
+            {departments.map((department, index) => (
+              <div key={index} className="flex items-center">
+                <input
+                  type="radio"
+                  name="selectedDepartment"
+                  value={department}
+                  onClick={(e: any) => setDepartment(e.target.value)}
+                  className="mr-2"
+                />
+                <span>{department}</span>
+              </div>
             ))}
-          </select>
-        </div>
+          </div>
 
-        {/* Add the project selection dropdown */}
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-600">Project Name:</label>
-          <select
-            name="selectedProject"
-            value={formData.selectedProject}
-            onChange={handleChange}
-            className="mt-1 p-2 border rounded-md w-full"
-          >
-            {projects.map((project, index) => (
-              <option key={index} value={project}>
-                {project}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        {/* Add the student department radio buttons */}
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-600">Student Dept:</label>
-          {departments.map((department, index) => (
-            <div key={index} className="flex items-center">
+          {/* Add the student gender radio buttons */}
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-600">
+              Student Gender:
+            </label>
+            <div className="flex items-center">
               <input
                 type="radio"
-                name="selectedDepartment"
-                value={department}
-                checked={formData.selectedDepartment === department}
-                onChange={handleChange}
+                name="selectedGender"
+                value="Female"
+                onClick={(e: any) => setGender("Female")}
                 className="mr-2"
               />
-              <span>{department}</span>
+              <span>Female</span>
             </div>
-          ))}
-        </div>
-
-        {/* Add the student gender radio buttons */}
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-600">Student Gender:</label>
-          <div className="flex items-center">
-            <input
-              type="radio"
-              name="selectedGender"
-              value="Female"
-              checked={formData.selectedGender === 'Female'}
-              onChange={handleChange}
-              className="mr-2"
-            />
-            <span>Female</span>
+            <div className="flex items-center">
+              <input
+                type="radio"
+                name="selectedGender"
+                value="Male"
+                onClick={(e: any) => setGender("Male")}
+                className="mr-2"
+              />
+              <span>Male</span>
+            </div>
           </div>
-          <div className="flex items-center">
-            <input
-              type="radio"
-              name="selectedGender"
-              value="Male"
-              checked={formData.selectedGender === 'Male'}
-              onChange={handleChange}
-              className="mr-2"
-            />
-            <span>Male</span>
-          </div>
-        </div>
 
-        {/* Add the start date and end date date pickers */}
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-600">Start Date:</label>
-          <input
-            type="date"
-            name="startDate"
-            value={formData.startDate}
-            onChange={handleChange}
-            className="mt-1 p-2 border rounded-md w-full"
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-600">End Date:</label>
-          <input
-            type="date"
-            name="endDate"
-            value={formData.endDate}
-            onChange={handleChange}
-            className="mt-1 p-2 border rounded-md w-full"
-            required
-          />
-        </div>
-
-        <button type="submit" className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600">
-          Submit
-        </button>
-      </form>
+          <button
+            type="submit"
+            className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600"
+          >
+            Submit
+          </button>
+        </form>
+      </div>{" "}
+      <Image src={formImage} alt="img" className="w-1/2"/>
     </div>
   );
 };
 
 export default Form;
-

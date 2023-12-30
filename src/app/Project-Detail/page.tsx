@@ -1,10 +1,10 @@
 import Project from '@/components/Project'
 import React from 'react'
 
-const page = () => {
+const projectDetail = () => {
   return (
     <div><Project/></div>
   )
 }
 
-export default page
+export default projectDetail

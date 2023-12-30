@@ -20,7 +20,7 @@ const Hero = () => {
 
           <div className="flex flex-col gap-y-10 lg:flex-row px-6 py-8 flex-1">
             {/* left-side */}
-            <div>
+            <div className="2/4">
               <h1 className="scroll-m-20 text-2xl font-extrabold tracking-tight lg:text-5xl ">
                 Welcome To Sindh Madressatul Islam University (SMIU)
               </h1>
@@ -32,17 +32,19 @@ const Hero = () => {
                 a university in February 2012.
               </p>
               <div className="flex items-center">
-                <Button className="mt-4 py-9 text-2xl">
-                  <ShoppingCart /> Supervisor-Detail
-                </Button>
+                <Link href={"/Supervisor"}>
+                  {" "}
+                  <Button className="mt-4 py-9 text-2xl">
+                    <ShoppingCart /> Supervisor-Detail
+                  </Button>
+                </Link>
               </div>
             </div>
-            <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 h-40 w-50 rounded-full bg-[#ffece3] ">
-              <Image
-                src={require("../../src/img/13254460_710745915734761_8157428650049174152_n.png")}
-                alt="img"
-              />
-            </div>
+            <Image
+              src={require("../../src/img/13254460_710745915734761_8157428650049174152_n.png")}
+              alt="img"
+              className="lg:max-w-lg lg:w-full md:w-1/2 bg-black   w-full rounded-full "
+            />
           </div>
 
           {/* Promotion */}
