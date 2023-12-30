@@ -1,10 +1,13 @@
-import Supervisor from '@/components/Supervisor'
-import React from 'react'
+import React from "react";
+import SuperviserNavbar from "@/components/supervisorUi/SuperviserNavbar";
+import Hero from "@/components/Hero";
 
-const page = () => {
+const supervisor = () => {
   return (
-    <div><Supervisor/></div>
-  )
-}
+    <>
+      <SuperviserNavbar /> <Hero />
+    </>
+  );
+};
 
-export default page
+export default supervisor;

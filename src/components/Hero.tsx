@@ -3,7 +3,6 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import React from "react";
 import { Badge } from "@/components/ui/badge";
-import Supervisor from "./Supervisor";
 import Link from "next/link";
 
 const Hero = () => {

@@ -1,13 +1,16 @@
 "use client";
 import Image from "next/image";
 import React, { useState } from "react";
-import img1 from "../../src/img/1.jpg";
-import img2 from "../../src/img/2.jpg";
-import img7 from "../../src/img/7.jpg";
-import img4 from "../../src/img/4.jpg";
-import img5 from "../../src/img/5.jpg";
-import img6 from "../../src/img/6.jpg";
-const Supervisor = () => {
+import img1 from "@/img/1.jpg";
+import img2 from "@/img/2.jpg";
+import img3 from "@/img/3.jpg";
+import img4 from "@/img/4.jpg";
+import img5 from "@/img/5.jpg";
+import img6 from "@/img/6.jpg";
+import img7 from "@/img/7.jpg";
+import SuperviserNavbar from "@/components/supervisorUi/SuperviserNavbar";
+
+const SupervisorInfo = () => {
   const [open, setOpen] = useState(false);
   const [text, settext] = useState("More");
   const [open2, setOpen2] = useState(false);
@@ -64,64 +67,75 @@ const Supervisor = () => {
   ];
 
   return (
-    <section className="text-gray-600 body-font">
-      <div className="container px-5 py-24 mx-auto">
-        <div className="flex flex-col">
-          <div className="h-1 bg-gray-200 rounded overflow-hidden">
-            <div className="w-24 h-full bg-indigo-500" />
+    <>
+      {" "}
+      <SuperviserNavbar />
+      <section className="text-gray-600 body-font">
+        <div className="container px-5 py-24 mx-auto">
+          <div className="flex flex-col">
+            <div className="h-1 bg-gray-200 rounded overflow-hidden">
+              <div className="w-24 h-full bg-indigo-500" />
+            </div>
+            <div className="flex flex-wrap sm:flex-row flex-col py-6 mb-12">
+              <h1 className="sm:w-2/5 text-gray-900 font-medium title-font text-2xl mb-2 sm:mb-0 ">
+                Supervisor Selection Page
+              </h1>
+            </div>
           </div>
-          <div className="flex flex-wrap sm:flex-row flex-col py-6 mb-12">
-            
-             <h1 className="sm:w-2/5 text-gray-900 font-medium title-font text-2xl mb-2 sm:mb-0 ">
-              Supervisor Selection Page
-            </h1>
-          </div>
-        </div>
-        <div className="flex flex-wrap sm:-m-4 -mx-4 -mb-10 -mt-4">
-          {teacherOj.map((e: any) => {
-            return (
-              <div className="p-4 md:w-1/3 sm:mb-0 mb-6">
-                <div className="rounded-lg h-64 overflow-hidden">
-                  <Image
-                    src={e.imag}
-                    alt="img"
-                    className="object-cover object-center h-full w-full"
-                  />
-                </div>
-                <h2 className="text-xl font-medium title-font text-gray-900 mt-5 ">
-                  {e.nameTeacher}{" "}
-                </h2>
-                <p className={open?"text-base leading-relaxed mt-5 h-25 overflow-y-scroll h-44":"text-base leading-relaxed mt-5 h-25"}>
-                  {e.descFirst}
-                  <span className={open ? "flex" : "hidden"}>{e.descSec}</span>
-                </p>
-                <a
-                  className="text-indigo-500 inline-flex items-center mt-3"
-                  onClick={() => {
-                    setOpen(!open);
-                  }}
-                >
-                  {text}
-
-                  <svg
-                    fill="none"
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    className="w-4 h-4 ml-2"
-                    viewBox="0 0 24 24"
+          <div className="flex flex-wrap sm:-m-4 -mx-4 -mb-10 -mt-4">
+            {teacherOj.map((e: any) => {
+              return (
+                <div className="p-4 md:w-1/3 sm:mb-0 mb-6">
+                  <div className="rounded-lg h-64 overflow-hidden">
+                    <Image
+                      src={e.imag}
+                      alt="img"
+                      className="object-cover object-center h-full w-full"
+                    />
+                  </div>
+                  <h2 className="text-xl font-medium title-font text-gray-900 mt-5 ">
+                    {e.nameTeacher}{" "}
+                  </h2>
+                  <p
+                    className={
+                      open
+                        ? "text-base leading-relaxed mt-5 h-25 overflow-y-scroll h-44"
+                        : "text-base leading-relaxed mt-5 h-25"
+                    }
                   >
-                    <path d="M5 12h14M12 5l7 7-7 7" />
-                  </svg>
-                </a>
-              </div>
-            );
-          })}
-        </div>{" "}
-      </div>
-    </section>
+                    {e.descFirst}
+                    <span className={open ? "flex" : "hidden"}>
+                      {e.descSec}
+                    </span>
+                  </p>
+                  <a
+                    className="text-indigo-500 inline-flex items-center mt-3"
+                    onClick={() => {
+                      setOpen(!open);
+                    }}
+                  >
+                    {text}
+
+                    <svg
+                      fill="none"
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      className="w-4 h-4 ml-2"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                  </a>
+                </div>
+              );
+            })}
+          </div>{" "}
+        </div>
+      </section>
+    </>
   );
 };
 
-export default Supervisor;
+export default SupervisorInfo;

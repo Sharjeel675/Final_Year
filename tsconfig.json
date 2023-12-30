@@ -22,6 +22,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/components/Project.tsx", "src/components/fetchingFormData.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/components/Project.tsx", "src/components/fetchingFormData.tsx", "src/middleware.js"],
   "exclude": ["node_modules"]
 }
