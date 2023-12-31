@@ -12,13 +12,13 @@ const Profession = () => {
       <Link href="/supervisor">
         {" "}
         <div className="w-44 h-44 bg-white border-2 flex items-center justify-center">
-        supervisor
+          supervisor
         </div>
       </Link>
       <Link href="/cordinator">
         {" "}
         <div className="w-44 h-44 bg-white border-2 flex items-center justify-center">
-        cordinator
+          cordinator
         </div>
       </Link>
     </section>
