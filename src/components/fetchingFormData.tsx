@@ -16,8 +16,7 @@ const FetchingFormData = ( ) => {
     };
     fetchData();
   }, []);
-  console.log(apiData);
-  return ( 
+   return ( 
     <table className="table-auto w-full text-left overflow-scroll h-44  ">
       <thead>
         <tr>

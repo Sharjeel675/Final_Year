@@ -94,14 +94,22 @@ const Form = () => {
             <label className="block text-sm font-medium text-gray-600">
               Supervisor Name
             </label>
-            <input
-              type="text"
-              name="supervisorBhand"
-              value={SupervisorName}
-              onChange={(e: any) => setSupervisorName(e.target.value)}
-              className="mt-1 p-2 border rounded-md w-full"
-              required
-            />
+
+            <select
+              name="teachersName"
+              id="teachersName"
+              className="bg-gray-200 w-full mr-12"
+              onChange={(e) => setSupervisorName(e.target.value)}
+            >
+              <option value="Sir Ameen Khuwaja">Sir Ameen Khuwaja</option>
+              <option value="Dr. Asif Ai Wagan">Dr. Asif Ai Wagan</option>
+              <option value="Dr. Asif Ali Laghari">Dr. Asif Ali Laghari</option>
+              <option value="Dr. Haque Nawaz Lashari">
+                Dr. Haque Nawaz Lashari{" "}
+              </option>
+              <option value="Dr. Sarmad">Dr. Sarmad </option>
+              <option value="Dr. Rind">Dr. Rind </option>
+            </select>
           </div>
 
           {/* Student ID*/}
@@ -202,7 +210,7 @@ const Form = () => {
           </button>
         </form>
       </div>{" "}
-      <Image src={formImage} alt="img" className="w-1/2"/>
+      <Image src={formImage} alt="img" className="w-1/2" />
     </div>
   );
 };
