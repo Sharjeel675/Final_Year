@@ -4,7 +4,7 @@ import React, { useState } from "react";
 
 import { CgProfile } from "react-icons/cg";
 
-const Header = () => {
+const CordinatorNavbar = () => {
   const [open, setOpen] = useState(true);
   return (
     <header>
@@ -28,17 +28,21 @@ const Header = () => {
             </span>
           </a>
           <nav className="md:ml-auto md:mr-auto flex justify-between items-center text-base text-1xl gap-x-5">
-            <Link href={"/"} className="mr-5 hover:text-gray-900">
+            <Link href={"/cordinator"} className="mr-5 hover:text-gray-900">
               Home
             </Link>
-            <Link href={"/Supervisor"} className="mr-5 hover:text-gray-900">
+            <Link
+              href={"/cordinator/supervisorInfo"}
+              className="mr-5 hover:text-gray-900"
+            >
               Supervisor
             </Link>
-            <Link href={"/Form"} className="mr-5 hover:text-gray-900">
-              Teachers-Form
-            </Link>
-            <Link href={"/Project-Detail"} className="mr-5 hover:text-gray-900">
-              Project-Detail
+
+            <Link
+              href={"/cordinator/studentsIGroup"}
+              className="mr-5 hover:text-gray-900"
+            >
+              Students Groups
             </Link>
           </nav>
           <CgProfile
@@ -67,4 +71,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default CordinatorNavbar;

@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { UserProvider } from "@auth0/nextjs-auth0/client";
+import { ClerkProvider } from "@clerk/nextjs";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,11 +20,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <UserProvider>
-          <Header />
-          {children}
-          <Footer />
-        </UserProvider>
+        <ClerkProvider publishableKey="pk_test_cmVndWxhci1tYXlmbHktNzguY2xlcmsuYWNjb3VudHMuZGV2JA">
+          <div className="flex-1 h-screen">
+            {" "}
+             {children}
+          </div>
+            <Footer />
+        </ClerkProvider>
       </body>
     </html>
   );
