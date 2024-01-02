@@ -9,7 +9,7 @@ const Profession = () => {
           students
         </div>
       </Link>
-      <Link href="/supervisor">
+      <Link href="/Supervisor">
         {" "}
         <div className="w-44 h-44 bg-white border-2 flex items-center justify-center">
           supervisor

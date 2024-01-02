@@ -28,17 +28,20 @@ const SuperviserNavbar = () => {
             </span>
           </a>
           <nav className="md:ml-auto md:mr-auto flex justify-between items-center text-base text-1xl gap-x-5">
-            <Link href={"/supervisor"} className="mr-5 hover:text-gray-900">
+            <Link href={"/Supervisor"} className="mr-5 hover:text-gray-900">
               Home
             </Link>
             <Link
-              href={"/supervisor/supervisorInfo"}
+              href={"/Supervisor/supervisorInfo"}
               className="mr-5 hover:text-gray-900"
             >
               Supervisor
             </Link>
 
-            <Link href={"/supervisor/studentsIGroup"} className="mr-5 hover:text-gray-900">
+            <Link
+              href={"/Supervisor/studentsIGroup"}
+              className="mr-5 hover:text-gray-900"
+            >
               Students Groups
             </Link>
           </nav>

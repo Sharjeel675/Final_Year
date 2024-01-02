@@ -1,13 +1,46 @@
 "use client";
 import SuperviserNavbar from "@/components/supervisorUi/SuperviserNavbar";
-import { useState } from "react";
-
+import { useEffect, useState } from "react";
+const dataFetch = async () => {
+  const data = await fetch("/api/project");
+  const jsonDta = await data.json();
+  return jsonDta;
+};
 const studentsIGroup = () => {
   const [SupervisorName, setSupervisorName] = useState("");
   const [Password, setPassword] = useState("");
   const [FilterName, setFilterName] = useState("");
+  const [apiData, setApiData] = useState<any[]>([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await dataFetch();
+      setApiData(data.result.rows);
+    };
+    fetchData();
+  }, []);
+  console.log(apiData);
 
   const profile = [
+    {
+      name: "Dr. Asif Ai Wagan",
+      password: "asif ali 123", 
+    },
+    {
+      name: "Dr. Asif Ali Laghari",
+      password: "langhari321",
+    },
+    {
+      name: "Dr. Asif Ai Wagan",
+      password: "asif ali",
+    },
+    {
+      name: "Dr. Asif Ai Wagan",
+      password: "asif ali",
+    },
+    {
+      name: "Dr. Asif Ai Wagan",
+      password: "asif ali",
+    },
     {
       name: "Dr. Asif Ai Wagan",
       password: "asif ali",
@@ -17,33 +50,20 @@ const studentsIGroup = () => {
       password: "asifwagan12",
     },
   ];
-  const students = [
-    {
-      teacher: "Dr. Asif Ai Wagan",
-      project: "asif ali",
-    },
-    {
-      teacher: "Dr. Asif Ai Wagan",
-      project: "asif ali",
-    },
-    {
-      teacher: "Dr. Asif Ai Laghari",
-      project: "asif ali",
-    },
-  ];
-
-  let studentsData = students.filter((e) => {
-    return e.teacher == FilterName;
+  let studentsData = apiData.filter((e) => {
+    return e.supervisorname == FilterName;
   });
-
   return (
     <>
       <SuperviserNavbar />{" "}
       <div className="w-3/4 mx-auto flex justify-between mt-12">
         <form
           onSubmit={(e) => {
-            profile.map((e: any) => {
-              if (e.name == SupervisorName && e.password == Password) {
+            apiData.map((e: any) => {
+              if (
+                e.supervisorname == SupervisorName &&
+                e.password == Password
+              ) {
                 setFilterName(SupervisorName);
               }
             });
@@ -89,7 +109,7 @@ const studentsIGroup = () => {
       {studentsData.map((e) => {
         return (
           <>
-            <div>{e.teacher}</div>
+            <div>{e.name}</div>
             <div>{e.project}</div>
           </>
         );

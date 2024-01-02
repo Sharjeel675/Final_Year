@@ -8,6 +8,6 @@ export async function GET(request: Request) {
 export async function POST(req: Request) {
   const data = await req.json();
   sql`INSERT INTO ProjectForm VALUES(${data.StudentId},${data.name},${data.fatherName},${data.SupervisorName},${data.ProjectTitle},${data.gender},${data.department},${data.mail})`;
-  console.log(data);
+  console.log(data,"ha ");
   return NextResponse.json({ status: "all ok" });
 }
