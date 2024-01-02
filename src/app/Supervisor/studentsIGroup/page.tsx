@@ -18,36 +18,31 @@ const studentsIGroup = () => {
     };
     fetchData();
   }, []);
-  console.log(apiData);
-
+ 
   const profile = [
     {
       name: "Dr. Asif Ai Wagan",
-      password: "asif ali 123", 
+      password: "asif ali 123",
     },
     {
       name: "Dr. Asif Ali Laghari",
       password: "langhari321",
     },
     {
-      name: "Dr. Asif Ai Wagan",
-      password: "asif ali",
+      name: "Mr Ameen Khowaja",
+      password: "ameenK3321",
     },
     {
-      name: "Dr. Asif Ai Wagan",
-      password: "asif ali",
+      name: "Dr. Sarmad",
+      password: "sarmad123",
     },
     {
-      name: "Dr. Asif Ai Wagan",
-      password: "asif ali",
+      name: "Dr. Haque Nawaz Lashari",
+      password: "nawaz123",
     },
     {
-      name: "Dr. Asif Ai Wagan",
-      password: "asif ali",
-    },
-    {
-      name: "Dr. Asif Ali Laghari",
-      password: "asifwagan12",
+      name: "Dr. Rind",
+      password: "rind123",
     },
   ];
   let studentsData = apiData.filter((e) => {
