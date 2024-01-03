@@ -22,18 +22,8 @@ const Form = () => {
   const [gender, setGender] = useState("");
   const [ProjectTitle, setProjectTitle] = useState("");
   const [StudentId, setStudentId] = useState("");
-  const [SupervisorName, setSupervisorName] = useState("");
-  console.log(
-    name,
-    fatherName,
-    mail,
-    department,
-    gender,
-    ProjectTitle,
-    StudentId,
-    SupervisorName,
-    "asasasasasas"
-  );
+  const [SupervisorName, setSupervisorName] = useState("Sir Ameen Khowaja");
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const api = await fetch("/api/project", {

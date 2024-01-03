@@ -1,9 +1,7 @@
 "use client";
 import Form from "@/components/Form";
-import CordinatorNavbar from "@/components/cordinatoNavbar/navbar";
-import StudentsNavbar from "@/components/studentNavbar/navbar";
-import Image from "next/image";
-import React, { useState } from "react";
+import CordinatorNavbar from "@/components/cordinatoNavbar/Navbar";
+  import React, { useState } from "react";
 
 const studentsForm = () => {
   return (
