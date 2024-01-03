@@ -32,7 +32,7 @@ const studentsIGroup = () => {
 
     fetchData();
   }, []);
-
+ 
   const profile = [
     {
       name: "Dr. Asif Ai Wagan",
@@ -43,19 +43,19 @@ const studentsIGroup = () => {
       password: "langhari321",
     },
     {
-      name: "Sir Ameen Khowaja",
-      password: "ameenK123",
-    },
-
-    {
-      name: "Dr. Haque Nawaz Lashari",
-      password: "nawaz123",
+      name: "Mr Ameen Khowaja",
+      password: "ameenK3321",
     },
     {
       name: "Dr. Sarmad",
       password: "sarmad123",
     },
     {
+      name: "Dr. Haque Nawaz Lashari",
+      password: "nawaz123",
+    },
+    {
+
       name: "Dr. Rind",
       password: "rind123",
     },

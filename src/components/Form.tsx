@@ -13,7 +13,6 @@ const departments = [
   "Cyber Security",
   "Data Science",
 ];
-
 const Form = () => {
   const [name, setName] = useState("");
   const [fatherName, setFatherName] = useState("");
