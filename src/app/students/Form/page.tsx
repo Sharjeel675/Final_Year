@@ -8,7 +8,7 @@ import React, { useState } from "react";
 const studentsForm = () => {
   return (
     <>
-      <CordinatorNavbar /> <Form />
+      <StudentsNavbar /> <Form />
     </>
   );
 };
