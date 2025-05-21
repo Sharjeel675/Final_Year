@@ -30,6 +30,7 @@ export default function TeamFormPopup() {
   const handleChange = (e: any) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+
   };
 
   const handleAddMember = () => {

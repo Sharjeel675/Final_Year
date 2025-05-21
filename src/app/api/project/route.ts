@@ -8,6 +8,11 @@ export async function GET(request: Request) {
 export async function POST(req: Request) {
   const data = await req.json();
   sql`INSERT INTO ProjectForm VALUES(${data.StudentId},${data.name},${data.fatherName},${data.SupervisorName},${data.ProjectTitle},${data.gender},${data.department},${data.mail})`;
-  console.log(data,"ha ");
+  return NextResponse.json({ status: "all ok" });
+}
+export async function DELETE(req: Request) {
+  const data = await req.json();
+  sql`DELETE FROM projectForm WHERE Studentid =$'${data.stdId}'`;
+  console.log(data.stdId);
   return NextResponse.json({ status: "all ok" });
 }

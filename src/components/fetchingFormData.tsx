@@ -2,9 +2,11 @@
 import CordinatorAccess from "@/Supabase/CordinatorAccess";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import CordinatorNavbar from "./cordinatoNavbar/Navbar";
 
 const FetchingFormData = () => {
   const [apiData, setApiData] = useState<any[]>([]);
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -49,6 +51,7 @@ const FetchingFormData = () => {
         </div>
       )}
     </div>
+
   );
 };
 

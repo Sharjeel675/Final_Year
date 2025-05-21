@@ -22,7 +22,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <ClerkProvider publishableKey="pk_test_cmVndWxhci1tYXlmbHktNzguY2xlcmsuYWNjb3VudHMuZGV2JA">
-          <div className="flex-1 h-screen">
+          <div className="flex-1 ">
             {" "}
              {children}
           </div>
