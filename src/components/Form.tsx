@@ -1,207 +1,209 @@
-"use client";
-
-import Image from "next/image";
 import React, { useState } from "react";
 import formImage from "../img/Graduate.jpg";
+import Image from "next/image";
+import SubmitStudentForm from "@/Supabase/StudentForm";
+type TeamMember = {
+  StudentId: number;
+  name: string;
+  fatherName: string;
+  mail: string;
+  department: string;
+  gender: string;
+};
 
-const teachers = ["Ameen kh", "", "Teacher 3"];
-const projects = ["Project A", "Project B", "Project C"];
-const departments = [
-  "Software Engineering",
-  "Computer Science",
-  "Artificial Intelligence",
-  "Cyber Security",
-  "Data Science",
-];
-const Form = () => {
-  const [name, setName] = useState("");
-  const [fatherName, setFatherName] = useState("");
-  const [mail, setMail] = useState("");
-  const [department, setDepartment] = useState("");
-  const [gender, setGender] = useState("");
-  const [ProjectTitle, setProjectTitle] = useState("");
-  const [StudentId, setStudentId] = useState("");
-  const [SupervisorName, setSupervisorName] = useState("Sir Ameen Khowaja");
+const initialFormData: TeamMember = {
+  StudentId: 0,
+  name: "",
+  fatherName: "",
+  mail: "",
+  department: "",
+  gender: "",
+};
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const api = await fetch("/api/project", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name,
-        fatherName,
-        mail,
-        department,
-        ProjectTitle,
-        StudentId,
-        SupervisorName,
-        gender,
-      }),
-    });
-    alert("Your Form Has Been Submited");
-    setName("");
+export default function TeamFormPopup() {
+  const [formData, setFormData] = useState<TeamMember>(initialFormData);
+  const [isFormHidden, setIsFormHidden] = useState(true);
+  const [teamMembers, setTeamMembers] = useState<TeamMember[]>([]);
+  const [projectTitle, setProjectTitle] = useState("");
+  const [supervisorName, setSupervisorName] = useState("");
+
+  const handleChange = (e: any) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+
+  };
+
+  const handleAddMember = () => {
+    const isValid = Object.entries(formData).every(
+      ([key, value]) => value !== "" && value !== 0
+    );
+
+    if (!isValid) {
+      alert("Please fill in all fields before adding a member.");
+      return;
+    }
+
+    setTeamMembers((prev) => [...prev, formData]);
+    setFormData(initialFormData);
+    setIsFormHidden(true);
   };
 
   return (
-    <div className="flex">
-      <div className=" lg:w-2/3 w-full mt-10 p-4 bg-white shadow-md rounded-md ">
-        <h1 className="text-2xl font-bold mb-4">Teachers Selection Form</h1>
-        <form onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-600">
-              Name:
-            </label>
-            <input
-              type="text"
-              name="name"
-              value={name}
-              onChange={(e: any) => setName(e.target.value)}
-              className="mt-1 p-2 border rounded-md w-full"
-              required
-            />
-          </div>
+    <>
 
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-600">
-              Father's Name:
-            </label>
-            <input
-              type="text"
-              name="fatherName"
-              value={fatherName}
-              onChange={(e: any) => setFatherName(e.target.value)}
-              className="mt-1 p-2 border rounded-md w-full"
-              required
-            />
-          </div>
+      <div className="flex flex-row items-center  justify-center h-screen">
+        <div className="w-1/2 p-4">
+          <label htmlFor="projecttitle " className="bloxk">Project Title</label>
+          <input
+            type="text"
+            value={projectTitle}
+            onChange={(e) => setProjectTitle(e.target.value)}
+            name="projecttitle"
+            placeholder="project title"
+            className="block w-1/2 border-2 border-blue-400 p-2 rounded-md my-4"
+          />
 
-          {/* Add the teacher selection dropdown */}
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-600">
-              Supervisor Name
-            </label>
+          <label htmlFor="supervisor">Supervisor name</label>
+          <select
+            name="teachersName"
+            id="teachersName"
+            className="bg-gray-200 w-full mr-12 my-3"
+            onChange={(e) => setSupervisorName(e.target.value)} >
+            <option value="Sir Ameen Khuwaja">Sir Ameen Khuwaja</option>
+            <option value="Dr. Asif Ai Wagan">Dr. Asif Ai Wagan</option>
+            <option value="Dr. Asif Ali Laghari">Dr. Asif Ali Laghari</option>
+            <option value="Dr. Haque Nawaz Lashari">
+              Dr. Haque Nawaz Lashari{" "}
+            </option>
+            <option value="Dr. Sarmad">Dr. Sarmad </option>
+            <option value="Dr. Rind">Dr. Rind </option>
+          </select>
 
-            <select
-              name="teachersName"
-              id="teachersName"
-              className="bg-gray-200 w-full mr-12"
-              onChange={(e) => setSupervisorName(e.target.value)}
-            >
-              <option value="Sir Ameen Khuwaja">Sir Ameen Khuwaja</option>
-              <option value="Dr. Asif Ai Wagan">Dr. Asif Ai Wagan</option>
-              <option value="Dr. Asif Ali Laghari">Dr. Asif Ali Laghari</option>
-              <option value="Dr. Haque Nawaz Lashari">
-                Dr. Haque Nawaz Lashari{" "}
-              </option>
-              <option value="Dr. Sarmad">Dr. Sarmad </option>
-              <option value="Dr. Rind">Dr. Rind </option>
-            </select>
-          </div>
 
-          {/* Student ID*/}
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-600">
-              Student ID
-            </label>
-            <input
-              type="text"
-              name="StudentId"
-              value={StudentId}
-              onChange={(e: any) => setStudentId(e.target.value)}
-              className="mt-1 p-2 border rounded-md w-full"
-              required
-            />
-          </div>
-
-          {/* Student Gmail*/}
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-600">
-              Student Email
-            </label>
-            <input
-              type="text"
-              name="Email"
-              value={mail}
-              onChange={(e: any) => setMail(e.target.value)}
-              className="mt-1 p-2 border rounded-md w-full"
-              required
-            />
-          </div>
-
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-600">
-              Project Title
-            </label>
-            <input
-              type="text"
-              name="fatherName"
-              value={ProjectTitle}
-              onChange={(e: any) => setProjectTitle(e.target.value)}
-              className="mt-1 p-2 border rounded-md w-full"
-              required
-            />
-          </div>
-
-          {/* Add the student department radio buttons */}
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-600">
-              Student Dept:
-            </label>
-            {departments.map((department, index) => (
-              <div key={index} className="flex items-center">
-                <input
-                  type="radio"
-                  name="selectedDepartment"
-                  value={department}
-                  onClick={(e: any) => setDepartment(e.target.value)}
-                  className="mr-2"
-                />
-                <span>{department}</span>
+          <p className="text-lg ">Team Members</p>
+          {teamMembers.map((member, index) => (
+            <>
+              <div key={index} className="flex flex-col mb-4 bg-gray-100 p-2 rounded-md shadow-sm">
+                <p className="text-lg font-semibold">{member.name}</p>
+                <p>Father Name: {member.fatherName}</p>
+                <p>Email: {member.mail}</p>
+                <p>Student ID: {member.StudentId}</p>
+                <p>Department: {member.department}</p>
               </div>
-            ))}
-          </div>
+            </>))}
 
-          {/* Add the student gender radio buttons */}
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-600">
-              Student Gender:
-            </label>
-            <div className="flex items-center">
-              <input
-                type="radio"
-                name="selectedGender"
-                value="Female"
-                onClick={(e: any) => setGender("Female")}
-                className="mr-2"
-              />
-              <span>Female</span>
-            </div>
-            <div className="flex items-center">
-              <input
-                type="radio"
-                name="selectedGender"
-                value="Male"
-                onClick={(e: any) => setGender("Male")}
-                className="mr-2"
-              />
-              <span>Male</span>
-            </div>
-          </div>
 
-          <button
-            type="submit"
-            className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600"
+          < button
+            onClick={() => setIsFormHidden(false)}
+            className="px-4 py-2 bg-green-500 text-white rounded block mt-2"
           >
-            Submit
-          </button>
-        </form>
-      </div>{" "}
-      <Image src={formImage} alt="img" className="w-1/2" />
-    </div>
-  );
-};
+            Open Form
+          </button >
+          < button
+            onClick={async () => {
+              await SubmitStudentForm(teamMembers, supervisorName, projectTitle)
+              setSupervisorName("")
+              setProjectTitle("")
+              setTeamMembers([])
+              
+            }}
+            className="px-4 py-2 bg-blue-500 text-white rounded mt-6"
+          >
+            Submit form
+          </button >
+        </div >
+        <div className="w-1/2">
 
-export default Form;
+          <Image
+            src={formImage}
+            alt="Form Image"
+            className="w-full h-screen"
+          />
+        </div>
+      </div >
+
+      <div
+        className={
+          isFormHidden
+            ? "hidden"
+            : "block bg-black/30 backdrop-blur-sm p-4 rounded-md mb-4 fixed h-screen w-full top-0 left-0 flex items-center justify-center z-50"
+        }
+      >
+        <div className="bg-white w-1/2 p-6 rounded shadow-lg">
+          <h2 className="text-lg font-bold mb-4">Add Team Member</h2>
+
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            placeholder="Name"
+            className="mb-2 w-full p-2 border rounded"
+          />
+
+          <input
+            type="text"
+            name="fatherName"
+            value={formData.fatherName}
+            onChange={handleChange}
+            placeholder="Father Name"
+            className="mb-2 w-full p-2 border rounded"
+          />
+
+          <input
+            type="email"
+            name="mail"
+            value={formData.mail}
+            onChange={handleChange}
+            placeholder="Email"
+            className="mb-2 w-full p-2 border rounded"
+          />
+
+          <input
+            type="number"
+            name="StudentId"
+            value={formData.StudentId}
+            onChange={handleChange}
+            placeholder="Student ID"
+            className="mb-2 w-full p-2 border rounded"
+          />
+
+          <input
+            type="text"
+            name="department"
+            value={formData.department}
+            onChange={handleChange}
+            placeholder="Department"
+            className="mb-2 w-full p-2 border rounded"
+          />
+
+          <select
+            name="gender"
+            value={formData.gender}
+            onChange={handleChange}
+            className="mb-4 w-full p-2 border rounded"
+          >
+            <option value="">Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
+
+          <div className="flex justify-end gap-4">
+            <button
+              onClick={() => setIsFormHidden(true)}
+              className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
+            >
+              Cancel
+            </button>
+            <button
+              onClick={handleAddMember}
+              className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+            >
+              Add Member
+            </button>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}

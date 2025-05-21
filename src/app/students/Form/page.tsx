@@ -6,7 +6,7 @@ import CordinatorNavbar from "@/components/cordinatoNavbar/Navbar";
 const studentsForm = () => {
   return (
     <>
-      <CordinatorNavbar /> <Form />
+      <StudentsNavbar /> <Form />
     </>
   );
 };

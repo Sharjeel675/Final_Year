@@ -1,111 +1,57 @@
 "use client";
+import CordinatorAccess from "@/Supabase/CordinatorAccess";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import CordinatorNavbar from "./cordinatoNavbar/Navbar";
 
-const dataFetch = async () => {
-  const data = await fetch("/api/project");
-  const jsonDta = await data.json();
-  return jsonDta;
-};
 const FetchingFormData = () => {
   const [apiData, setApiData] = useState<any[]>([]);
-  const [password, setPassword] = useState("");
-  const [hide, setHide] = useState(true);
+
+
   useEffect(() => {
     const fetchData = async () => {
-      const data = await dataFetch();
-      console.log(data);
-      setApiData(data.result.rows);
+      const data = await CordinatorAccess();
+      setApiData(data || []);
     };
     fetchData();
   }, []);
-  return (
-    <>
-      <CordinatorNavbar />
-      <div className="flex flex-col text-center w-full ">
-        <h1 className="scroll-m-20 text-2xl font-extrabold tracking-tight lg:text-5xl mt-5 ">
-          Cordinator Section
-        </h1>
-        <p className="leading-7 [&:not(:first-child)]:mt-6 lg:text-2xl">
-          This Section is Use For Cordinator
-        </p>
-      </div>
-      {hide ? (
-        <div>
-          <input
-            className="flex flex-col text-center w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-            type="password"
-            placeholder="Cordinator Password"
-            value={password}
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
-          />
 
-          <button
-            className=" flex flex-col text-center  text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg mt-20 ml-10 sm:mt-5"
-            onClick={() => {
-              if (password == "hamza") {
-                setHide(false);
-              }
-            }}
-          >
-            Button
-          </button>
-        </div>
+  return (
+    <div className="max-w-7xl mx-auto px-4 py-10">
+      <h1 className="text-2xl font-bold text-gray-800 mb-6">Student Projects</h1>
+
+      {apiData.length === 0 ? (
+        <p className="text-gray-500">No project data available.</p>
       ) : (
-        <table className="table-auto w-full text-left overflow-scroll h-44  ">
-          <thead>
-            <tr>
-              <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl w-44">
-                Student ID
-              </th>
-              <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">
-                Student Name
-              </th>
-              <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
-                Father Name
-              </th>
-              {/* <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
-            Supervisor Name
-          </th> */}
-              <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
-                Project Title
-              </th>
-              <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
-                Gender
-              </th>
-              <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
-                Student Email
-              </th>
-              <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
-                Department
-              </th>
-              <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
-                SupervisorName
-              </th>
-              <th className="w-10 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tr rounded-br" />
-            </tr>
-          </thead>
-          <tbody>
-            {apiData.map((e: any) => {
-              return (
-                <tr>
-                  <td className="px-4 py-3">{e.studentid}</td>
-                  <td className="px-4 py-3">{e.name}</td>
-                  <td className="px-4 py-3">{e.fathername}</td>
-                  <td className="px-4 py-3">{e.project}</td>
-                  <td className="px-4 py-3">{e.gender}</td>
-                  <td className="px-4 py-3">{e.email}</td>
-                  <td className="px-4 py-3">{e.department}</td>
-                  <td className="px-4 py-3">{e.supervisorname}</td>
-                </tr>
-              );
-            })}{" "}
-          </tbody>
-        </table>
-      )}{" "}
-    </>
+        <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+          {apiData.map((student, index) => (
+            <div
+              key={index}
+              className="bg-white rounded-xl shadow-md p-6 border border-gray-100"
+            >
+              <h2 className="text-lg font-semibold text-gray-800 mb-2">{student.name}</h2>
+
+              <p className="font-medium text-lg  text-gray-600 mb-1">
+                <span className="font-medium">Project:</span> {student.project_title}
+              </p>
+
+              <p className="  text-gray-600 font-medium text-lg">
+                <span className="">Supervisor:</span> {student.supervisor_name}
+              </p>
+              <p className="font-medium text-lg    text-gray-600">
+                <span className="font-medium">Team Members:</span> {student.team.length}
+              </p>
+              <Link href={`/cordinator/studentsIGroup/${student.project_id}`}>
+                <button className="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md">
+                  View Details   </button>
+              </Link>
+
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+
   );
 };
 
