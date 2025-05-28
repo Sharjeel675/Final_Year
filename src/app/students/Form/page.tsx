@@ -1,7 +1,7 @@
 "use client";
 import Form from "@/components/Form";
-import CordinatorNavbar from "@/components/cordinatoNavbar/Navbar";
-  import React, { useState } from "react";
+import StudentsNavbar from "@/components/studentNavbar/navbar";
+   import React, { useState } from "react";
 
 const studentsForm = () => {
   return (
