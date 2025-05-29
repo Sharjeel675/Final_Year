@@ -32,15 +32,13 @@ const FetchingFormData = () => {
               <h2 className="text-lg font-semibold text-gray-800 mb-2">{student.name}</h2>
 
               <p className="font-medium text-lg  text-gray-600 mb-1">
-                <span className="font-medium">Project:</span> {student.project_title}
+                <span className="font-medium">Project Title:</span> {student.project_title}
               </p>
 
               <p className="  text-gray-600 font-medium text-lg">
                 <span className="">Supervisor:</span> {student.supervisor_name}
               </p>
-              <p className="font-medium text-lg    text-gray-600">
-                <span className="font-medium">Team Members:</span> {student.team.length}
-              </p>
+             
               <Link href={`/cordinator/studentsIGroup/${student.project_id}`}>
                 <button className="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md">
                   View Details   </button>
