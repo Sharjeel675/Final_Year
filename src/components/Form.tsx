@@ -9,6 +9,8 @@ type TeamMember = {
   mail: string;
   department: string;
   gender: string;
+  member1: string;
+  member2: string;
 };
 
 const initialFormData: TeamMember = {
@@ -18,41 +20,63 @@ const initialFormData: TeamMember = {
   mail: "",
   department: "",
   gender: "",
+  member1: "",
+  member2: "",
 };
 
 export default function TeamFormPopup() {
-  const [formData, setFormData] = useState<TeamMember>(initialFormData);
-  const [isFormHidden, setIsFormHidden] = useState(true);
-  const [teamMembers, setTeamMembers] = useState<TeamMember[]>([]);
   const [projectTitle, setProjectTitle] = useState("");
-  const [supervisorName, setSupervisorName] = useState("");
+  const [supervisorName, setSupervisorName] = useState("Sir Ameen Khuwaja");
+  const [formData, setFormData] = useState<TeamMember>(initialFormData);
 
-  const handleChange = (e: any) => {
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  }
 
-  };
 
-  const handleAddMember = () => {
-    const isValid = Object.entries(formData).every(
-      ([key, value]) => value !== "" && value !== 0
-    );
-
-    if (!isValid) {
-      alert("Please fill in all fields before adding a member.");
-      return;
-    }
-
-    setTeamMembers((prev) => [...prev, formData]);
-    setFormData(initialFormData);
-    setIsFormHidden(true);
-  };
 
   return (
     <>
 
       <div className="flex flex-row items-center  justify-center h-screen">
         <div className="w-1/2 p-4">
+
+          <label htmlFor="name" >Name</label>
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            placeholder="Name"
+            className="mb-2 w-full p-2 border rounded"
+          />
+
+          <label htmlFor="email">Email</label>
+          <input
+            type="email"
+            name="mail"
+            value={formData.mail}
+            onChange={handleChange}
+            placeholder="Email"
+            className="mb-2 w-full p-2 border rounded"
+          />
+
+          <label htmlFor="department">Department</label>
+          <input
+            type="text"
+            name="department"
+            value={formData.department}
+            onChange={handleChange}
+            placeholder="Department"
+            className="mb-2 w-full p-2 border rounded"
+          />
+
+
           <label htmlFor="projecttitle " className="bloxk">Project Title</label>
           <input
             type="text"
@@ -60,7 +84,7 @@ export default function TeamFormPopup() {
             onChange={(e) => setProjectTitle(e.target.value)}
             name="projecttitle"
             placeholder="project title"
-            className="block w-1/2 border-2 border-blue-400 p-2 rounded-md my-4"
+            className="block w-1/2 border-2 border-blue-400 p-2 rounded-md "
           />
 
           <label htmlFor="supervisor">Supervisor name</label>
@@ -79,33 +103,40 @@ export default function TeamFormPopup() {
             <option value="Dr. Rind">Dr. Rind </option>
           </select>
 
+          <label htmlFor="member1">Member 1 Name</label>
+          <input
+            type="text"
+            value={formData.member1}
+            onChange={handleChange}
+            name="member1"
+            placeholder="Member 1 Name"
+            className="block w-1/2 border-2 border-blue-400 p-2 rounded-md "
+          />
 
-          <p className="text-lg ">Team Members</p>
-          {teamMembers.map((member, index) => (
-            <>
-              <div key={index} className="flex flex-col mb-4 bg-gray-100 p-2 rounded-md shadow-sm">
-                <p className="text-lg font-semibold">{member.name}</p>
-                <p>Father Name: {member.fatherName}</p>
-                <p>Email: {member.mail}</p>
-                <p>Student ID: {member.StudentId}</p>
-                <p>Department: {member.department}</p>
-              </div>
-            </>))}
+          <label htmlFor="member1">Member 2 Name</label>
+          <input
+            type="text"
+            value={formData.member2}
+            onChange={handleChange}
+            name="member2"
+            placeholder="Member 1 Name"
+            className="block w-1/2 border-2 border-blue-400 p-2 rounded-md "
+          />
 
 
-          < button
-            onClick={() => setIsFormHidden(false)}
-            className="px-4 py-2 bg-green-500 text-white rounded block mt-2"
-          >
-            Open Form
-          </button >
+
+
+
+
           < button
             onClick={async () => {
-              await SubmitStudentForm(teamMembers, supervisorName, projectTitle)
-              setSupervisorName("")
+              if (!projectTitle || !formData.name || !formData.mail || !formData.department || !formData.member1 || !formData.member2) {
+                alert("Please fill all fields");
+                return
+              }
+              await SubmitStudentForm([formData], supervisorName, projectTitle)
               setProjectTitle("")
-              setTeamMembers([])
-              
+              setFormData(initialFormData);
             }}
             className="px-4 py-2 bg-blue-500 text-white rounded mt-6"
           >
@@ -122,88 +153,6 @@ export default function TeamFormPopup() {
         </div>
       </div >
 
-      <div
-        className={
-          isFormHidden
-            ? "hidden"
-            : "block bg-black/30 backdrop-blur-sm p-4 rounded-md mb-4 fixed h-screen w-full top-0 left-0 flex items-center justify-center z-50"
-        }
-      >
-        <div className="bg-white w-1/2 p-6 rounded shadow-lg">
-          <h2 className="text-lg font-bold mb-4">Add Team Member</h2>
-
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            placeholder="Name"
-            className="mb-2 w-full p-2 border rounded"
-          />
-
-          <input
-            type="text"
-            name="fatherName"
-            value={formData.fatherName}
-            onChange={handleChange}
-            placeholder="Father Name"
-            className="mb-2 w-full p-2 border rounded"
-          />
-
-          <input
-            type="email"
-            name="mail"
-            value={formData.mail}
-            onChange={handleChange}
-            placeholder="Email"
-            className="mb-2 w-full p-2 border rounded"
-          />
-
-          <input
-            type="number"
-            name="StudentId"
-            value={formData.StudentId}
-            onChange={handleChange}
-            placeholder="Student ID"
-            className="mb-2 w-full p-2 border rounded"
-          />
-
-          <input
-            type="text"
-            name="department"
-            value={formData.department}
-            onChange={handleChange}
-            placeholder="Department"
-            className="mb-2 w-full p-2 border rounded"
-          />
-
-          <select
-            name="gender"
-            value={formData.gender}
-            onChange={handleChange}
-            className="mb-4 w-full p-2 border rounded"
-          >
-            <option value="">Select Gender</option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-          </select>
-
-          <div className="flex justify-end gap-4">
-            <button
-              onClick={() => setIsFormHidden(true)}
-              className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
-            >
-              Cancel
-            </button>
-            <button
-              onClick={handleAddMember}
-              className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-            >
-              Add Member
-            </button>
-          </div>
-        </div>
-      </div>
     </>
   );
 }

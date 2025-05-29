@@ -12,7 +12,7 @@ const SubmitStudentForm = async (team: any, supervisor: string, project_title: s
             })
 
         if (error) {
-            console.error('Error inserting data:', error.message)
+            console.log( error.message)
         } else {
             alert('form successfully submitted:')
 
